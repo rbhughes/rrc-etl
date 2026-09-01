@@ -13,7 +13,16 @@ comparison project.
 pip install -e .
 rrc fetch-pdq     # ~3.7 GB zip from the RRC's MFT portal
 rrc build-pdq     # -> data/pdq/*.parquet (~1.4 GB)
+rrc fetch-wells   # ~1M well surface locations from the RRC GIS
+                  # service -> data/wells/well_locations.parquet
 ```
+
+`fetch-wells` fills the dump's biggest gap: the PDQ has no
+coordinates anywhere. The RRC public map viewer's "Well Locations"
+layer does — NAD83 lat/lon plus the 8-digit API (3-digit county +
+5-digit unique, the same pair `og_well_completion` carries), pulled
+via ~1,050 paginated REST queries. Rows without a real API (old
+hardcopy-era permitted locations, ~26% of the layer) are skipped.
 
 Paths: `RRC_RAW` (default `data/raw`) for downloads, `RRC_OUT`
 (default `data`) for parquet.
