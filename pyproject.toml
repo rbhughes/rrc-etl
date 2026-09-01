@@ -1,0 +1,23 @@
+[project]
+name = "rrc-etl"
+version = "0.1.0"
+description = "Fetch and normalize Texas RRC public oil and gas data (PDQ production dump)"
+requires-python = ">=3.12"
+license = {file = "LICENSE"}
+dependencies = [
+    "duckdb>=1.0",
+    "requests>=2.32",
+]
+
+[project.scripts]
+rrc = "rrc_etl.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
